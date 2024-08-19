@@ -1,7 +1,10 @@
 import Image from "next/image";
+import type { Product } from "../interfaces";
 import AddToCartBtn from "./Buttons/AddToCartBtn";
 
 type ProductCard = {
+    isAdded: boolean;
+    product: Product;
     imageSrc: string;
     productTitle: string;
     productDescription: string;
@@ -9,6 +12,8 @@ type ProductCard = {
 };
 
 const ProductCard = ({
+    isAdded,
+    product,
     imageSrc,
     productTitle,
     productDescription,
@@ -33,7 +38,7 @@ const ProductCard = ({
             </p>
             <div className="flex items-center gap-2 justify-between xs:flex-col xs:items-stretch">
                 <p className="font-bold">${price}</p>
-                <AddToCartBtn />
+                <AddToCartBtn product={product} isAdded={isAdded} />
             </div>
         </article>
     );

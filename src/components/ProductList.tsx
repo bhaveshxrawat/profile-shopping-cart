@@ -1,5 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
+import type { Product } from "./interfaces";
+import useCart from "@/hooks/useCart";
 import localforage from "localforage";
 import ProductCard from "./ui/ProductCard";
 
@@ -7,25 +9,9 @@ const fetchedProducts = localforage.createInstance({
     name: "localProducts",
 });
 
-const cart = localforage.createInstance({
-    name: "userCart",
-});
-
-type Product = {
-    id: number;
-    title: string;
-    price: number;
-    category: string;
-    description: string;
-    image: string;
-    rating: {
-        rate: number;
-        count: number;
-    };
-};
-
 const ProductList = () => {
     const [products, setProducts] = useState<Product[]>([]);
+    const { cart } = useCart();
     useEffect(() => {
         async function fetchProducts() {
             try {
@@ -48,15 +34,21 @@ const ProductList = () => {
         fetchProducts();
     }, []);
 
+    useEffect(() => {
+        console.log(cart);
+    });
+
     return (
         <div className="grid xs:grid-cols-2 grid-cols-[repeat(auto-fill,minmax(16rem,0.75fr))] gap-4 gap-y-6">
             {products?.map((product) => (
                 <ProductCard
-                    key={product!.id}
-                    imageSrc={product!.image}
-                    price={product!.price}
-                    productDescription={product!.description}
-                    productTitle={product!.title}
+                    isAdded={cart.some((item) => item.id === product.id)}
+                    key={product.id}
+                    product={product}
+                    imageSrc={product.image}
+                    price={product.price}
+                    productDescription={product.description}
+                    productTitle={product.title}
                 />
             ))}
         </div>

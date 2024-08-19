@@ -1,11 +1,17 @@
+"use client";
+
+import useCart from "@/hooks/useCart";
+
 const Header = () => {
-    const item: number = 0;
+    const { cart } = useCart();
     return (
         <header className="flex justify-between p-4 items-center mb-4">
             <h1 className="text-2xl font-bold">Products</h1>
             <button title="User's cart">
                 <i className="block relative">
-                    {item < 0 && <span className="count__badge">{item}</span>}
+                    {cart.length > 0 && (
+                        <span className="count__badge">{cart.length}</span>
+                    )}
                     <svg
                         width="24px"
                         height="24px"
