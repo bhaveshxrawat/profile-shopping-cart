@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import type { Product } from "./interfaces";
-import useCart from "@/hooks/useCart";
+import { useCart } from "@/context/CartContext";
 import localforage from "localforage";
 import ProductCard from "./ui/ProductCard";
 
@@ -33,10 +33,6 @@ const ProductList = () => {
         }
         fetchProducts();
     }, []);
-
-    useEffect(() => {
-        console.log(cart);
-    });
 
     return (
         <div className="grid xs:grid-cols-2 grid-cols-[repeat(auto-fill,minmax(16rem,0.75fr))] gap-4 gap-y-6">

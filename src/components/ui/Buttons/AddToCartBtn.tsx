@@ -1,5 +1,5 @@
-import useCart from "@/hooks/useCart";
-import { Product } from "@/components/interfaces";
+import { useCart } from "@/context/CartContext";
+import type { Product } from "@/components/interfaces";
 
 const AddToCartBtn = ({
     product,
@@ -12,7 +12,7 @@ const AddToCartBtn = ({
     return (
         <button
             onClick={() => {
-                addToCart(product);
+                isAdded ? null : addToCart(product);
             }}
             className="px-3 py-2 bg-p-red text-white rounded-md"
         >
