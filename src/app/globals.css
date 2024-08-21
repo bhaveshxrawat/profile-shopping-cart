@@ -12,6 +12,16 @@ body {
   background: rgb(var(--background));
 }
 
+@layer base {
+  .cart-btn {
+    @apply p-4 flex items-center justify-center border border-black rounded-md leading-[.5] aspect-square;
+
+    &:disabled {
+      opacity: 0.5;
+    }
+  }
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;

@@ -1,13 +1,15 @@
 "use client";
 
 import { useCart } from "@/context/CartContext";
+import { useRouter } from "next/navigation";
 
 const Header = () => {
+    const router = useRouter();
     const { cart } = useCart();
     return (
         <header className="flex justify-between p-4 items-center mb-4">
             <h1 className="text-2xl font-bold">Products</h1>
-            <button title="User's cart">
+            <button title="User's cart" onClick={() => router.push("/cart")}>
                 <i className="block relative">
                     {cart.length > 0 && (
                         <span className="count__badge">{cart.length}</span>
